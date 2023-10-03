@@ -3,4 +3,4 @@ Example : App
 ======================
 
 
-This is sample App
+This is sample App.
