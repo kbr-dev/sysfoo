@@ -26,13 +26,15 @@ pipeline {
         sh 'mvn clean test'
       }
     }
+
     stage('Parallel Stage') {
-      parallel{
+      parallel {
         stage('package') {
           agent {
             docker {
               image 'maven:3.6.3-jdk-11-slim'
             }
+
           }
           when {
             branch 'master'
@@ -43,6 +45,7 @@ pipeline {
             archiveArtifacts 'target/*.war'
           }
         }
+
         stage('Docker BnP') {
           agent any
           when {
@@ -57,8 +60,16 @@ pipeline {
                 dockerImage.push("dev")
               }
             }
+
           }
         }
+
+      }
+    }
+
+    stage('Deploy To Dev') {
+      steps {
+        sh 'docker-compose up -d'
       }
     }
 
