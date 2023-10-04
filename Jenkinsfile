@@ -26,7 +26,7 @@ pipeline {
         sh 'mvn clean test'
       }
     }
-    stage('Parallel Stage') {}
+    stage('Parallel Stage') {
       parallel{
         stage('package') {
           agent {
