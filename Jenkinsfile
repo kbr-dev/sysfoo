@@ -16,10 +16,18 @@ pipeline {
     }
 
     stage('package') {
+      when {
+        branch 'master'
+      }
       steps {
         echo 'package maven app'
         sh 'mvn package -DskipTests'
         archiveArtifacts 'target/*.war'
+      }
+    }
+    stage('Docker BnP') {
+      when {
+        branch 'master'
       }
     }
 
