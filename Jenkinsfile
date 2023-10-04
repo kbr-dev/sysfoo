@@ -28,8 +28,10 @@ pipeline {
     }
 
     stage('package') {
-      when {
-        branch 'master'
+      when { 
+        allOf { 
+          branch 'master'
+        }
       }
       agent {
         docker {
@@ -44,8 +46,10 @@ pipeline {
     }
     stage('Docker BnP') {
       agent any
-      when {
-        branch 'master'
+      when {  
+        allOf {  
+          branch 'master'
+        }
       }
       steps {
         script {
